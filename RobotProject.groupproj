@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{EA3AC9A0-7ECA-451E-8D95-70DB18C1E991}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="RobotApp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Tests\RobotTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RobotApp">
+        <MSBuild Projects="RobotApp.dproj"/>
+    </Target>
+    <Target Name="RobotApp:Clean">
+        <MSBuild Projects="RobotApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RobotApp:Make">
+        <MSBuild Projects="RobotApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RobotTest">
+        <MSBuild Projects="Tests\RobotTest.dproj"/>
+    </Target>
+    <Target Name="RobotTest:Clean">
+        <MSBuild Projects="Tests\RobotTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RobotTest:Make">
+        <MSBuild Projects="Tests\RobotTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RobotApp;RobotTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RobotApp:Clean;RobotTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RobotApp:Make;RobotTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
